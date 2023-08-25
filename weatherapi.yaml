@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weatherapi
+spec:
+  selector:
+    matchLabels:
+      app: weatherapi
+  template:
+    metadata:
+      labels:
+        app: weatherapi
+    spec:
+      containers:
+      - name: weatherapi
+        image: sakthisaran/weatherapi-1:latest
+        resources:
+          limits:
+            memory: "300Mi"
+            cpu: "800m"
+        ports:
+        - containerPort: 5000

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv
+spec:
+  capacity:
+    storage: 10Gi   # Replace this with the desired storage size
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce   # Change this if you need a different access mode
+  storageClassName: local-storage #must match with the storage class name of persistant volume clain
+  hostPath:
+    path: /home/sakthisaran/sql-in-kube1  #Destination of the local storage

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sql
+spec:
+  replicas: 1 # replace with the required replicas 
+  selector:
+    matchLabels:
+      app: sql
+  template:
+    metadata:
+      labels:
+        app: sql
+    spec:
+      containers:
+      - name: sql
+        image: mysql 
+        resources:
+          limits:
+            memory: "900Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3306
+        env: #environment variyables for the sql server
+        - name: MYSQL_ROOT_PASSWORD
+          value: password
+        volumeMounts:
+        - name: mysql-pst
+          mountPath: /var/lib/mysql #mount path inside the sql deployment which represents the persistant volume
+      volumes:
+      - name: mysql-pst
+        persistentVolumeClaim: #mount persistant volume claim
+          claimName: mysql-pvc
+
+
+
+
+
+
+
+
+
+
+          
